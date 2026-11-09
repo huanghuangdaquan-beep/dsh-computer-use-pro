@@ -1,0 +1,46 @@
+{
+  "name": "dsh-computer-use-pro",
+  "version": "0.3.6",
+  "displayName": "DSH Computer Use Pro",
+  "description": "让 DeepSeek Harness 真的能操作本机桌面：接 MiniMax 电脑操控驱动（cua-driver）的原生 MCP stdio server，暴露 13 个 cu_* 工具（窗口列表 / 窗口归属诊断 / UIA 语义树（自带 settle + 压缩视图 + query 投影）/ 语义三级升级点击 / 键盘 / 一键恢复陈旧实例 / 谓词验证 / 原生 59 工具转发 / 体检 / 鼠标键盘覆盖层诊断 / 滚动 / 拖拽 / 剪贴板），外加「computer-use-pro」定位规程技能 —— UIA 语义优先、Electron 懒发布重读、幽灵窗口与陈旧实例辨析、像素定位纪律。",
+  "type": "module",
+  "main": "lib/index.js",
+  "icon": "./icon.png",
+  "exports": {
+    ".": "./lib/index.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "skills",
+    "scripts",
+    "cordis.patch.yml",
+    "icon.png",
+    "README.md"
+  ],
+  "engines": {
+    "node": "^22.19 || >=24"
+  },
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "computer-use",
+    "desktop-automation",
+    "uia",
+    "accessibility",
+    "mcp",
+    "cua-driver"
+  ],
+  "license": "MIT",
+  "author": "nb",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "scripts": {
+    "probe": "node scripts/mcp-probe.mjs doctor",
+    "test": "node test/smoke.mjs"
+  }
+}

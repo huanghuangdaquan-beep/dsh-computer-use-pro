@@ -1,0 +1,54 @@
+# cordis.patch.yml — dsh-computer-use-pro 的 bundle 贡献层
+# profile 的 dsh.profile.bundles 列出本 bundle 时，这一行被插入插件树。
+# 打包后用【包名】定位（安装后文件在 profile 的 node_modules 里，只有包名能解析）。
+#
+# ⚠️ 整行替换语义：在 profile 里覆盖本行时必须重写全部 key，只写改动项会丢其余配置。
+- insert:
+    - id: computer-use-pro
+      name: dsh-computer-use-pro
+      config:
+        # 总开关（volatile：设置里改完即时生效，工具常驻注册、执行时读开关）
+        enabled: true
+        # 驱动路径覆盖（exe 或目录）；'' = 自动扫 ~/.minimax/computer-use/components
+        driverPath: ''
+        # 往系统提示注入「桌面控制工具路由」一节（解决装了但模型不主动用）
+        promptSection: true
+        # 点击投递方式：background（不抢前台）| foreground（其它值回落 background 并打 warn）
+        defaultDelivery: background
+        # 单次驱动调用默认超时（毫秒）
+        defaultTimeoutMs: 20000
+        # 观察 / 点击类调用的超时（毫秒）
+        stateTimeoutMs: 60000
+        # 一次走查最多取多少元素
+        maxElements: 400
+        # 元素清单的输出字符预算（默认视图已折叠装饰节点，8000 够用）
+        # 数值项在 apply() 里会收敛到安全区间：超时 1000-600000、
+        # maxElements 1-5000、maxChars 200-100000、idleShutdownMs 0-3600000
+        maxChars: 8000
+        # 驱动子进程空闲回收（毫秒，0 = 不回收）
+        idleShutdownMs: 120000
+        # 截图默认落盘目录
+        screenshotDir: '~/.dsh/computer-use/shots'
+        # cu_key 时自愈桌面覆盖层并输出键盘动作行
+        keyboardOverlay: true
+        # 自绘置顶按键浮窗（Ctrl+A / 输入文本）；不抢焦点、鼠标穿透
+        keyboardOverlayWindow: true
+        overlayDurationMs: 1400
+        overlayIdleShutdownMs: 60000
+        # 浮窗外观：主题 dark|light|accent、字号 10-32、不透明度百分比 40-100
+        overlayTheme: dark
+        overlayFontSize: 15
+        overlayOpacityPct: 93
+        # auto(跟随窗口/无坐标则底部居中) | fixed(记住首次位置) | center | top | bottom
+        overlayPosition: auto
+        overlayFadeMs: 140
+        # 按 title 解析窗口的结果缓存（0 = 不缓存，省 list_windows 往返）
+        targetCacheMs: 1500
+        # 点击复核取样档位：fast(2 轮) | balanced(3 轮) | thorough(4 轮)
+        observeProfile: balanced
+        # 截图保留策略（0 = 不清理；开启后只删本插件命名的 PNG）
+        # 注意：这两个键开启后插件会删除自己生成的旧截图，默认关闭
+        screenshotMaxFiles: 0
+        screenshotMaxAgeDays: 0
+        # 加载时打印一行概况
+        announceOnLoad: true
